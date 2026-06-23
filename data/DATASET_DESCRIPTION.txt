@@ -1,0 +1,129 @@
+BMIF 802 LAB 6 DATASET DESCRIPTION
+=====================================
+
+FILE
+----
+data/heart_disease_cleveland.csv
+
+SOURCE
+------
+Processed Cleveland subset of the UCI Heart Disease dataset.
+
+Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1989).
+Heart Disease [Dataset]. UCI Machine Learning Repository.
+DOI: https://doi.org/10.24432/C52P4X
+Dataset page: https://archive.ics.uci.edu/dataset/45/heart+disease
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+CLASSIFICATION TARGET
+---------------------
+Original target column: num
+
+- 0: no heart disease according to the dataset's angiographic definition
+- 1, 2, 3, or 4: heart disease is present
+
+For the main lab, create a new binary target named heart_disease:
+
+- 0 when num is 0
+- 1 when num is greater than 0
+
+COLUMN DESCRIPTIONS
+-------------------
+
+age
+    Age in years. Numeric.
+
+sex
+    Sex recorded in the historical dataset.
+    0 = female
+    1 = male
+    This is a binary coded variable. The dataset does not represent sex or gender
+    beyond these two historical codes.
+
+cp
+    Chest pain type. Categorical code.
+    1 = typical angina
+    2 = atypical angina
+    3 = non-anginal pain
+    4 = asymptomatic
+
+trestbps
+    Resting blood pressure measured on admission to hospital, in mm Hg. Numeric.
+
+chol
+    Serum cholesterol, in mg/dL. Numeric.
+
+fbs
+    Whether fasting blood sugar was greater than 120 mg/dL.
+    0 = false
+    1 = true
+    Binary coded variable.
+
+restecg
+    Resting electrocardiographic result. Categorical code.
+    0 = normal
+    1 = ST-T wave abnormality
+    2 = probable or definite left ventricular hypertrophy by Estes' criteria
+    The numbers are labels, not a continuous scale.
+
+thalach
+    Maximum heart rate achieved during the exercise test. Numeric.
+
+exang
+    Whether exercise-induced angina was observed.
+    0 = no
+    1 = yes
+    Binary coded variable.
+
+oldpeak
+    ST depression induced by exercise relative to rest. Numeric.
+
+slope
+    Slope of the peak exercise ST segment. Categorical code.
+    1 = upsloping
+    2 = flat
+    3 = downsloping
+    The numbers are labels, not a continuous scale.
+
+ca
+    Number of major vessels coloured by fluoroscopy.
+    Expected values are 0 through 3.
+    Four records contain the missing-value marker '?'.
+    This can be kept as a small numeric count after imputation.
+
+thal
+    Thallium stress-test result. Categorical code.
+    3 = normal
+    6 = fixed defect
+    7 = reversible defect
+    Two records contain the missing-value marker '?'.
+    The numbers are labels, not measurements. One-hot encoding is appropriate.
+
+num
+    Original disease-status target. Values range from 0 through 4.
+    Convert this column to the binary heart_disease target for the main lab.
+
+MISSING VALUES
+--------------
+The original file uses '?' rather than a blank cell or NaN.
+
+Expected missing values:
+
+- ca: 4 missing values
+- thal: 2 missing values
+
+No other columns should contain missing values. In the main lab, determine the
+most common value of each missing column using only the training set, then use
+that value to fill the corresponding column in both training and testing data.
+
+SUGGESTED FEATURE GROUPS
+------------------------
+One-hot encoded categorical predictors:
+    cp, restecg, slope, thal
+
+Binary predictors that may remain coded 0/1:
+    sex, fbs, exang
+
+Numeric predictors:
+    age, trestbps, chol, thalach, oldpeak, ca
+
